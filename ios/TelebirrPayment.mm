@@ -9,7 +9,7 @@
 /// URL Schemes defined in the project
 static NSString *_Nonnull const ReturnApp = @"ifhcrsApp";
 
-@interface TelebirrPayment ()
+@interface TelebirrPaymentModule ()
 
 // Properties to store resolve/reject blocks
 @property (nonatomic, copy) RCTPromiseResolveBlock resolve;
@@ -17,7 +17,7 @@ static NSString *_Nonnull const ReturnApp = @"ifhcrsApp";
 
 @end
 
-@implementation TelebirrPayment
+@implementation TelebirrPaymentModule
 
 // Expose this module to React Native
 RCT_EXPORT_MODULE();
