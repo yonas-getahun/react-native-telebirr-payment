@@ -6,8 +6,8 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const TelebirrPayment = NativeModules.TelebirrPayment
-  ? NativeModules.TelebirrPayment
+const TelebirrPayment = NativeModules.TelebirrPaymentModule
+  ? NativeModules.TelebirrPaymentModule
   : new Proxy(
       {},
       {
@@ -17,6 +17,4 @@ const TelebirrPayment = NativeModules.TelebirrPayment
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return TelebirrPayment.multiply(a, b);
-}
+export default TelebirrPayment;
