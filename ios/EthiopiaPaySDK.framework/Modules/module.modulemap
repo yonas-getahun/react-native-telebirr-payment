@@ -1,0 +1,6 @@
+framework module EthiopiaPaySDK {
+  umbrella header "EthiopiaPaySDK.h"
+  export *
+
+  module * { export * }
+}

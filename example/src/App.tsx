@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, Button } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import TelebirrPayment from 'react-native-telebirr-payment';
 
 export default function App() {
@@ -43,20 +49,39 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 16, textAlign: 'center' }}>
-        Welcome to React Native Telebirr Payment
-      </Text>
-      <View style={{ marginTop: 10, marginHorizontal: 20 }}>
-        <Button title="Pay" onPress={handlePayment} />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.subcontainer}>
+        <Text style={styles.textStyle}>
+          Welcome to React Native Telebirr Payment
+        </Text>
+        <View>
+          <TouchableOpacity style={styles.buttonStyle} onPress={handlePayment}>
+            <Text>Pay</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+  },
+  subcontainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textStyle: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  buttonStyle: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+    paddingHorizontal: 20,
   },
 });

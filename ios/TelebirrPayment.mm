@@ -6,9 +6,6 @@
 
 #import "TelebirrPayment.h"
 
-/// URL Schemes defined in the project
-static NSString *_Nonnull const ReturnApp = @"ifhcrsApp";
-
 @interface TelebirrPaymentModule ()
 
 // Properties to store resolve/reject blocks
