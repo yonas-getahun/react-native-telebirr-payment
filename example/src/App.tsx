@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Text,
   View,
@@ -8,40 +9,35 @@ import {
 import TelebirrPayment from 'react-native-telebirr-payment';
 
 export default function App() {
+  const [resultCode, setResultCode] = useState(null);
+  const [resultMessage, setresultMessage] = useState(null);
   const handlePayment = async () => {
     try {
-      const appId = '1227472858880206';
-      const shortCode = '900727';
+      const appId = '1320965192345604';
+      const shortCode = '5510';
       const receiveCode =
-        'TELEBIRR$BUYGOODS$900727$1$012502f699dd91a2af4dccc4968e73f9eae003$120m';
+        'TELEBIRR$BUYGOODS$5510$0.05$1011aaa976afdd534429233b9b538d26727007$120m';
 
       const result = await TelebirrPayment.startPay(
         appId,
         shortCode,
         receiveCode
       );
-      console.log('result', result); // Log success message if payment initiated successfully
-      const errorMatch = result.match(
-        /Error code:\s*(-?\d+),\s*Message:\s*(.*)/
-      );
-
-      if (errorMatch) {
-        const errorCode = parseInt(errorMatch[1], 10); // Convert extracted code to a number
-        const errorMessage = errorMatch[2]; // Extract the message
-
-        if (errorCode === -3) {
-          console.log('User canceled the payment.');
-        } else if (errorCode === 0) {
+      const { code, message } = result;
+      setResultCode(code);
+      setresultMessage(message);
+      if (result) {
+        if (code === -3) {
+          console.log('User canceled the payment.', message);
+        } else if (code === 0) {
           console.log('Successful Payment.');
-        } else if (errorCode === -10) {
-          console.log('Telebir Payment is not installed.');
+        } else if (code === -10) {
+          console.log('Telebir Payment is not installed.', message);
         } else {
-          console.log(`Error Code: ${errorCode}, Message: ${errorMessage}`);
-          // Handle other errors
+          console.log(`Error Code: ${code}, Message: ${message}`);
         }
       } else {
         console.log('Unexpected log format:', result);
-        // Handle unexpected log format
       }
     } catch (error) {
       console.error('Payment initiation failed:', error);
@@ -54,10 +50,14 @@ export default function App() {
         <Text style={styles.textStyle}>
           Welcome to React Native Telebirr Payment
         </Text>
-        <View>
+        <View style={styles.payment}>
           <TouchableOpacity style={styles.buttonStyle} onPress={handlePayment}>
-            <Text>Pay</Text>
+            <Text style={styles.textStyle}>Pay</Text>
           </TouchableOpacity>
+        </View>
+        <View style={styles.payment}>
+          <Text style={styles.textStyle}>code: {resultCode}</Text>
+          <Text style={styles.textStyle}>message: {resultMessage}</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -70,12 +70,15 @@ const styles = StyleSheet.create({
   },
   subcontainer: {
     flex: 1,
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  payment: {
+    marginTop: 10,
+  },
   textStyle: {
     fontSize: 16,
-    textAlign: 'center',
   },
   buttonStyle: {
     backgroundColor: '#007AFF',

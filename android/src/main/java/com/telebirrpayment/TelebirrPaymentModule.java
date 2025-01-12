@@ -6,6 +6,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.huawei.ethiopia.pay.sdk.api.core.data.PayInfo;
 import com.huawei.ethiopia.pay.sdk.api.core.utils.PaymentManager;
 import com.huawei.ethiopia.pay.sdk.api.core.listener.PayCallback;
@@ -40,12 +42,11 @@ public class TelebirrPaymentModule extends ReactContextBaseJavaModule {
                     Log.d(TAG, "onPayCallback: code " + code + " errMsg " + errMsg);
 
                     // Resolve the promise with code and message
+                    WritableMap result = new WritableNativeMap();
+                    result.putInt("code", code);
+                    result.putString("message", errMsg);
+                    promise.resolve(result);
                    
-                        promise.resolve( "Error code: " + code + ", Message: " + errMsg);
-                   
-
-                    // Display Toast as feedback
-                    //Toast.makeText(getReactApplicationContext(), "Code: " + code + ", Message: " + errMsg, Toast.LENGTH_SHORT).show();
                 }
             });
 

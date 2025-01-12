@@ -51,33 +51,30 @@ RCT_EXPORT_METHOD(startPay:(NSString *)appId
         return;
     }
 
+     dispatch_async(dispatch_get_main_queue(), ^{
+     self.resolve = resolve;
+     self.reject = reject;
+    
     // Initialize EthiopiaPaySDK
     EthiopiaPayManager *manager = [EthiopiaPayManager sharedManager];
-    manager.delegate = self;
-    
-    // Save the resolve and reject blocks for later use in the callback
-    self.resolve = resolve;
-    self.reject = reject;
-
+    manager.delegate =  self;
+   
     // Start payment
     [manager startPayWithAppId:appId shortCode:shortCode receiveCode:receiveCode returnAppScheme:returnAppScheme];
+    });
 }
 
 // EthiopiaPayManagerDelegate callback for payment result
 - (void)payResultCallbackWithCode:(NSInteger)code msg:(NSString *)msg {
-    if (code == 0) { // Assuming 0 is success
-        if (self.resolve) {
-            self.resolve(@{ @"code": @(code), @"msg": msg });
-        }
-    } else {
-        if (self.reject) {
-            self.reject([NSString stringWithFormat:@"%ld", (long)code], msg, nil);
-        }
-    }
-    
-    // Clean up the resolve/reject blocks
-    self.resolve = nil;
-    self.reject = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+          if (self.resolve) {
+              NSDictionary *result = @{@"code": @(code), @"message": msg};
+              self.resolve(result);
+          }
+          
+          self.resolve = nil;
+          self.reject = nil;
+      });    
 }
 
 
