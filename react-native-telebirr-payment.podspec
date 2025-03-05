@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => min_ios_version_supported }
-  s.source       = { :git => "https://github.com/yonas-getahun/react-native-telebirr-payment.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/yonasme/react-native-telebirr-payment.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm}"
   s.vendored_frameworks = 'ios/EthiopiaPaySDK.framework'
