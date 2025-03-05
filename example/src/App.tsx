@@ -1,22 +1,22 @@
-import { useState } from 'react';
 import {
   Text,
-  View,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  Image,
+  Alert,
 } from 'react-native';
 import TelebirrPayment from 'react-native-telebirr-payment';
 
 export default function App() {
-  const [resultCode, setResultCode] = useState(null);
-  const [resultMessage, setresultMessage] = useState(null);
+  const amount = '3.00 ETB';
+
   const handlePayment = async () => {
     try {
-      const appId = '1320965192345604';
-      const shortCode = '5510';
+      const appId = '00000000000';
+      const shortCode = '00000';
       const receiveCode =
-        'TELEBIRR$BUYGOODS$5510$0.05$1011aaa976afdd534429233b9b538d26727007$120m';
+        'TELEBIRR$BUYGOODS$900727$3$0147d4536f7f4115d3fbaa93f2ba5e4e559004$120m';
 
       const result = await TelebirrPayment.startPay(
         appId,
@@ -24,42 +24,50 @@ export default function App() {
         receiveCode
       );
       const { code, message } = result;
-      setResultCode(code);
-      setresultMessage(message);
-      if (result) {
+
+      setTimeout(() => {
+        let alertTitle = 'Payment Result';
+        let alertMessage = `Code: ${code}\nMessage: ${message}`;
+
         if (code === -3) {
-          console.log('User canceled the payment.', message);
+          alertTitle = 'Payment Canceled';
+          alertMessage = 'You canceled the payment.';
         } else if (code === 0) {
-          console.log('Successful Payment.');
+          alertTitle = 'Payment Successful';
+          alertMessage = `Your payment of ${amount} was completed successfully!`;
         } else if (code === -10) {
-          console.log('Telebir Payment is not installed.', message);
-        } else {
-          console.log(`Error Code: ${code}, Message: ${message}`);
+          alertTitle = 'App Not Installed';
+          alertMessage =
+            'Telebirr Payment app is not installed on this device.';
         }
-      } else {
-        console.log('Unexpected log format:', result);
-      }
+
+        Alert.alert(alertTitle, alertMessage);
+      }, 100);
     } catch (error) {
-      console.error('Payment initiation failed:', error);
+      Alert.alert('Error', 'Payment initiation failed.');
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.subcontainer}>
-        <Text style={styles.textStyle}>
-          Welcome to React Native Telebirr Payment
-        </Text>
-        <View style={styles.payment}>
-          <TouchableOpacity style={styles.buttonStyle} onPress={handlePayment}>
-            <Text style={styles.textStyle}>Pay</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.payment}>
-          <Text style={styles.textStyle}>code: {resultCode}</Text>
-          <Text style={styles.textStyle}>message: {resultMessage}</Text>
-        </View>
-      </View>
+      {/* React Native Logo */}
+      <Image
+        source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+
+      {/* Welcome Text */}
+      <Text style={styles.title}>Welcome to</Text>
+      <Text style={styles.subtitle}>Your Telebirr Payment App</Text>
+
+      {/* Amount Display */}
+      <Text style={styles.amount}>Amount: {amount}</Text>
+
+      {/* Pay Now Button */}
+      <TouchableOpacity style={styles.button} onPress={handlePayment}>
+        <Text style={styles.buttonText}>Pay with telebirr</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -67,24 +75,58 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  subcontainer: {
-    flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#121212',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  payment: {
-    marginTop: 10,
-  },
-  textStyle: {
-    fontSize: 16,
-  },
-  buttonStyle: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 5,
-    margin: 10,
     paddingHorizontal: 20,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#AAA',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  amount: {
+    fontSize: 18,
+    color: '#FFD700',
+    fontWeight: '600',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 14,
+    paddingHorizontal: 40,
+    borderRadius: 30,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+  scrollIndicator: {
+    position: 'absolute',
+    bottom: 40,
+    width: 12,
+    height: 12,
+    backgroundColor: '#FFF',
+    borderRadius: 6,
+    opacity: 0.8,
   },
 });
