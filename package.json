@@ -1,6 +1,6 @@
 {
   "name": "react-native-telebirr-payment",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "telebirr inAppSDK payment module",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
