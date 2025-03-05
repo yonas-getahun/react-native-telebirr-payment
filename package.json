@@ -60,14 +60,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yonasme/react-native-telebirr-payment.git"
+    "url": "git+https://github.com/yonas-getahun/react-native-telebirr-payment.git"
   },
-  "author": "Yonas Getahun <34026974+yonasme@users.noreply.github.com> (https://github.com/yonasme)",
+  "author": "Yonas Getahun <34026974+yonas-getahun@users.noreply.github.com> (https://github.com/yonas-getahun)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yonasme/react-native-telebirr-payment/issues"
+    "url": "https://github.com/yonas-getahun/react-native-telebirr-payment/issues"
   },
-  "homepage": "https://github.com/yonasme/react-native-telebirr-payment#readme",
+  "homepage": "https://github.com/yonas-getahun/react-native-telebirr-payment#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
