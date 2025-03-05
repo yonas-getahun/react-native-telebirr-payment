@@ -89,6 +89,12 @@ export default function App() {
 | `-3`                | Cancellation of payment ( when the user is taken to the telebirr superapp and the user cancels the payment   |                             
 | `-10`               | The Payment is not installed. (if the telebirr superapp apk is not installed (testbed or production apk)     |
 
+## UAT Usage
+
+for android UAT(test) you have to change the android archive (aar) inside node_modules\react-native-telebirr-payment\android\build.gradle to
+'libs/EthiopiaPaySdkModule-prod-release.aar' to 'libs/EthiopiaPaySdkModule-uat-release.aar'
+this will launch the telebirr testbed app and make the transction
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

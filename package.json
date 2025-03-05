@@ -1,6 +1,6 @@
 {
   "name": "react-native-telebirr-payment",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "telebirr inAppSDK payment module",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -47,6 +47,14 @@
   },
   "keywords": [
     "react-native",
+    "telebirr",
+    "mobile-payment",
+    "ethio-telecom",
+    "telebirr-integration",
+    "ethiopian-payments",
+    "react-native-payments",
+    "inAppSDK",
+    "inApp-payment",
     "ios",
     "android"
   ],
