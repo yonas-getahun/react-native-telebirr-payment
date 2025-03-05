@@ -9,6 +9,10 @@ A react native telebirr inAppSDK payment module which is mainly intended for app
 npm install react-native-telebirr-payment
 ```
 
+## Demo
+
+![](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDh6Y2NzZm9wbWxqZzEwejA4b240amR0N2xxN3RzdDVtZjVwOXUzaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3CmDaeMwLrUWo06iPq/giphy.gif)
+
 ## Usage/Examples
 
 
