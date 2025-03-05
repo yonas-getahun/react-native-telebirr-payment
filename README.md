@@ -91,7 +91,7 @@ export default function App() {
 
 ## UAT Usage
 
-for android UAT(test) you have to change the android archive (aar) inside node_modules\react-native-telebirr-payment\android\build.gradle to
+for android UAT(test) you have to change the android archive (aar) inside node_modules\react-native-telebirr-payment\android\build.gradle from
 'libs/EthiopiaPaySdkModule-prod-release.aar' to 'libs/EthiopiaPaySdkModule-uat-release.aar'
 this will launch the telebirr testbed app and make the transction
 
